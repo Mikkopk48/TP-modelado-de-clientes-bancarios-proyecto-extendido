@@ -1,11 +1,13 @@
 package com.devtalles.project;
 
+import com.devtalles.project.clients.Client;
 import com.devtalles.project.clients.ClientCompany;
 import com.devtalles.project.clients.IndividualClient;
 import com.devtalles.project.clients.PremiumClient;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,11 +25,9 @@ public class Main {
                 "Pérez"
         );
 
-        individualClient.showClient();
-
         System.out.println("Cliente Premiun");
 
-        PremiumClient clientePremium = new PremiumClient(
+        PremiumClient premiumClient = new PremiumClient(
                 "Calle Falsa 123",
                 "3794123456",
                 "juan@email.com",
@@ -43,9 +43,8 @@ public class Main {
                 "Pérez"
         );
 
-        clientePremium.showClient();
 
-
+        System.out.println("Cliente Empresa");
         System.out.println("Cliente Empresa");
 
         ClientCompany clientCompany = new ClientCompany(
@@ -60,7 +59,10 @@ public class Main {
                 "Laura Fernández"
         );
 
-        clientCompany.showClient();
+        List<Client> clients = List.of(individualClient, premiumClient, clientCompany);
+        for (Client client:clients){
+            client.showClient();
+        }
     }
 }
 
