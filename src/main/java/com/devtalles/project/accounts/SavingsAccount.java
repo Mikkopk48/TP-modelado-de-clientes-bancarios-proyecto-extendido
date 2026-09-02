@@ -1,18 +1,18 @@
-package com.devtalles.project.account;
+package com.devtalles.project.accounts;
+
+import com.devtalles.project.clients.Client;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-public class CurrentAccount extends Account {
-
-    public CurrentAccount(String client,
-                          int balance,
-                          String accountCurrency,
+public class SavingsAccount extends Account {
+    public SavingsAccount(Client client,
+                          BigDecimal balance,
                           LocalDate accountOpeningDate,
                           CurrentState currentState,
                           List<String> movements) {
-        super(client, balance, accountCurrency, accountOpeningDate, currentState, movements);
+        super(client, balance, accountOpeningDate, currentState, movements);
     }
 
     @Override
@@ -22,18 +22,6 @@ public class CurrentAccount extends Account {
         super.deposit(amount, balance, currentState);
     }
 
-    @Override
-
-    public void withdraw(BigDecimal amount,
-                         BigDecimal balance,
-                         CurrentState currentState) {
-        if (amount.compareTo(BigDecimal.ZERO) <= 0 || currentState == CurrentState.NOTABLE || balance.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Error: Esta operación no puede ser realizada");
-        } else {
-            balance = balance.subtract(amount);
-            System.out.println("La operación se realizó correctamente");
-        }
-    }
 
     @Override
     public void showBalance(BigDecimal balance) {
@@ -54,5 +42,16 @@ public class CurrentAccount extends Account {
     public void closeAccount(CurrentState currentState) {
         super.closeAccount(currentState);
     }
-}
 
+    @Override
+    public void withdraw(BigDecimal amount,
+                         BigDecimal balance,
+                         CurrentState currentState) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0 || currentState == CurrentState.NOTABLE) {
+            throw new IllegalArgumentException("Error: Esta operación no puede ser realizada");
+        } else {
+            balance = balance.subtract(amount);
+            System.out.println("Se retiro: " + amount);
+        }
+    }
+}
