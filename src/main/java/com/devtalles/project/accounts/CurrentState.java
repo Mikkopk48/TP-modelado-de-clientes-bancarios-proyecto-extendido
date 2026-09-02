@@ -1,4 +1,4 @@
-package com.devtalles.project.account;
+package com.devtalles.project.accounts;
 
 public enum CurrentState{
     ABLE,
